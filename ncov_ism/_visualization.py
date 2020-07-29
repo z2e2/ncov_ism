@@ -1,14 +1,15 @@
 import logging
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.colors as mcolors
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
+plt.ioff()
 font = {# 'family' : 'serif', # Times (source: https://matplotlib.org/tutorials/introductory/customizing.html)
         'family': 'sans-serif', # Helvetica
         'size'   : 12}
 
 matplotlib.rc('font', **font)
-
 text = {'usetex': False}
 matplotlib.rc('text', **text)
 monospace_font = {'fontname':'monospace'}
@@ -200,7 +201,7 @@ def global_color_map(COLOR_DICT, ISM_list, out_dir):
         ax.hlines(y, swatch_start_x, swatch_end_x,
                   color=COLOR_DICT[name], linewidth=18)
     plt.savefig('{}/COLOR_MAP.png'.format(out_dir), bbox_inches='tight', dpi=dpi)
-    plt.show()
+    plt.close(fig)
     
 def func(pct, allvals):
     '''
@@ -223,7 +224,7 @@ def plot_pie_chart(sizes, labels, colors, ax):
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     return wedges, labels
 
-def regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list):
+def regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list, COLOR_DICT, OUTPUT_FOLDER):
     '''
     time series plot for a region of interest
     '''
@@ -288,9 +289,9 @@ def regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list):
     ax.grid(which='minor', alpha=0.3, linestyle='--')
     ax.grid(which='major', alpha=0.8)
     plt.savefig('{}/3_ISM_growth_{}.png'.format(OUTPUT_FOLDER, region), bbox_inches='tight')
-    plt.show()  
+    plt.close(fig)  
     
-def ISM_plot(ISM_df, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER):
+def ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER):
     '''
     Generate figures for ISM analysis.
     '''
@@ -374,7 +375,7 @@ def ISM_plot(ISM_df, region_list, region_pie_chart, state_list, state_pie_chart,
           prop={'family': monospace_font['fontname']}
         )
     plt.savefig('{}/1_regional_ISM.png'.format(OUTPUT_FOLDER), bbox_inches='tight', dpi=DPI, transparent=True)
-    plt.show()
+    plt.close(fig)
     
     fig = plt.figure(figsize=(25, 20))   
 
@@ -439,7 +440,7 @@ def ISM_plot(ISM_df, region_list, region_pie_chart, state_list, state_pie_chart,
           prop={'family': monospace_font['fontname']}
         )
     plt.savefig('{}/2_intra-US_ISM.png'.format(OUTPUT_FOLDER), bbox_inches='tight', dpi=DPI, transparent=True)
-    plt.show()
+    plt.close(fig)
     
     font = {'family': 'sans-serif', # Helvetica
             'size'   : 25}
@@ -447,4 +448,4 @@ def ISM_plot(ISM_df, region_list, region_pie_chart, state_list, state_pie_chart,
     matplotlib.rc('font', **font) 
 
     for region in time_series_region_list:
-        regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list)
+        regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list, COLOR_DICT, OUTPUT_FOLDER)

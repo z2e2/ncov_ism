@@ -1,18 +1,39 @@
-# ISM
-Informative Subtype Markers (ISM) is an efficient framework for genetic subtyping of a pandemic virus and implement it for SARS-CoV-2, the novel coronavirus that causes COVID-19.        
+# Informative Subtype Marker (ISM) Analysis Report
+Informative Subtype Marker (ISM) is an efficient framework for genetic subtyping of a pandemic virus and implement it for SARS-CoV-2, the novel coronavirus that causes COVID-19.        
 Drexel University EESI Lab, 2020        
 Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu  
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
 ## Abstract
-We utilize an entropy-based analysis to identify mutational signatures of SARS-CoV-2 sequences in the GISAID database available as of April 5, 2020. Our  subtyping method identifies nucleotide sites within the viral genome which are highly informative of variation between the viral genomes sequenced in different individuals. These sites are used to characterize individual virus sequence with a characteristic Informative Subtype Marker (ISM). The ISMs provide signatures that can be efficiently and rapidly utilized to quantitatively trace viral dynamics through geography and time. We show that by analyzing the ISM of currently available SARS-CoV-2 sequences, we are able to profile international and interregional differences in viral subtype, and visualize the emergence of viral subtypes in different countries over time. To validate and demonstrate the utility of ISM-based subtyping: (1) We show the distinct genetic subtypes of European infections, in which early on infections are related to the viral subtypes that has become dominant in Italy followed by the development of local subtypes, (2) We distinguish subtypes associated with outbreaks in distinct parts of the United States, identify the development of a local subtype potentially due to community to transmission and distinguish it from the predominant subtype in New York, suggesting that the outbreak in New York is linked to imported cases from Europe. (3) We present results that quantitatively show the temporal behavior of the emergence of SARS-CoV-2 from localization in China to a pattern of distinct regional subtypes as the virus spreads throughout the world over time.
+The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reportedly 8.7 million confirmed cases worldwide by June 21, 2020. The global SARS-CoV-2 pandemic highlights the importance of tracking viral transmission dynamics in real-time. Through June 2020, researchers have obtained genetic sequences of SARS-CoV-2 from over 50 thousand samples from infected individuals worldwide. Since the virus readily mutates, each sequence of an infected individual contains useful information linked to the individual's exposure location and sample date. But, there are over 30,000 bases in the full SARS-CoV-2 genome, so tracking genetic variants on a whole-sequence basis becomes unwieldy. *ncov_ism* is a method to instead efficiently identify and label genetic variants, or "subtypes" of SARS-CoV-2. This method defines a compact set of nucleotide sites that characterize the most variable (and thus most informative) positions in the viral genomes sequenced from different individuals, called an Informative Subtype Marker or *ISM*. This tool defines viral subtypes for each ISM, and analyze the regional distribution of subtypes to track the progress of the pandemic.
+
 ## Entropy of viral sequences
-![Fig 0](results/1_overall_entropy.pdf "Entropy analysis")
+
+[comment]: # ![Fig 0](results/1_overall_entropy.pdf "Entropy analysis")
+
 ## ISM distribution worldwide
-![Fig 1](results/6_regional_ISM.pdf "Subtype composition in different locations worldwide")
+The following figure shows the major ISMs in selective countries/regions (in the legend next to each
+country/region, we show the date when a major ISM was first sequenced in that country/region). 
+ISMs with less than 5% abundance are plotted as “OTHER”. 
+<img src="results/1_regional_ISM.png" alt="regional" width="200"/>
+
+[comment]: # ![Fig 1](results/1_regional_ISM.png "Subtype composition in different locations worldwide")
+
 ## ISM distribution in US
-![Fig 2](results/7_intra-US_ISM.pdf "Subtype composition in different locations in US")
+The following figure shows the ISM distribution in the United States in 25 states. ISMs with less than 5% abundance are plotted as “OTHER”. 
+
+<img src="results/2_intra-US_ISM.png" alt="states" width="200"/>
+
+[comment]: # ![Fig 2](results/2_intra-US_ISM.png "Subtype composition in different locations in US")
+
 ## The dynamic of ISM in different locations
-![Fig 3](results/8_ISM_growth_USA.pdf "the dynamic subtype composition in different locations over time")
-![Fig 4](results/8_ISM_growth_Japan.pdf "the dynamic subtype composition in different locations over time")
-![Fig 5](results/8_ISM_growth_Australia.pdf "the dynamic subtype composition in different locations over time")
+The following figures show the relative abundance (%) of ISMs in DNA sequences from different regions as sampled over
+time.
+
+<img src="results/3_ISM_growth_USA.png" alt="USA" width="200"/>
+
+[comment]: # ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time")
+
+[comment]: # ![Fig 4](results/3_ISM_growth_Japan.png "the dynamic subtype composition in Japan over time")
+
+[comment]: # ![Fig 5](results/3_ISM_growth_Australia.png "the dynamic subtype composition in Australia over time")
