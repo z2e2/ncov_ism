@@ -1,9 +1,11 @@
 .ipynb_checkpoints/
 __pycache__/
 dist/
+build/
 *.pyc
 *.egg-info
 *.fasta
 *.tsv
 *.csv
 *.json
+*.pkl
