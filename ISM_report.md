@@ -28,11 +28,11 @@ The following figure shows the ISM distribution in the United States in 25 state
 <!--- ![Fig 2](results/2_intra-US_ISM.png "Subtype composition in different locations in US") --->
 
 ## The dynamic of ISM in different locations
-The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+1. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
 <img src="results/3_ISM_growth_Mainland China.png" alt="China" width="800"/>
-The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+2. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
 <img src="results/3_ISM_growth_France.png" alt="France" width="800"/>
-The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+3. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
 <img src="results/3_ISM_growth_USA.png" alt="USA" width="800"/>
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
