@@ -4,12 +4,20 @@ Drexel University EESI Lab, 2020
 Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu  
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
+###### Report date: 2020/07/28
+<!--- dividing line --->
+
 ## Abstract
 The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reportedly 8.7 million confirmed cases worldwide by June 21, 2020. The global SARS-CoV-2 pandemic highlights the importance of tracking viral transmission dynamics in real-time. Through June 2020, researchers have obtained genetic sequences of SARS-CoV-2 from over 50 thousand samples from infected individuals worldwide. Since the virus readily mutates, each sequence of an infected individual contains useful information linked to the individual's exposure location and sample date. But, there are over 30,000 bases in the full SARS-CoV-2 genome, so tracking genetic variants on a whole-sequence basis becomes unwieldy. *ncov_ism* is a method to instead efficiently identify and label genetic variants, or "subtypes" of SARS-CoV-2. This method defines a compact set of nucleotide sites that characterize the most variable (and thus most informative) positions in the viral genomes sequenced from different individuals, called an Informative Subtype Marker or *ISM*. This tool defines viral subtypes for each ISM, and analyze the regional distribution of subtypes to track the progress of the pandemic.
 
 ## Entropy of viral sequences
 
 <!--- ![Fig 0](results/1_overall_entropy.pdf "Entropy analysis") --->
+
+## ISM positions
+Mapping ISM sites to the reference viral genome
+
+<!--- dividing line --->
 
 ## ISM distribution worldwide
 The following figure shows the major ISMs in selective countries/regions (in the legend next to each
@@ -41,3 +49,22 @@ The following figure shows the ISM distribution in the United States in 25 state
 <img src="results/3_ISM_growth_USA.png" alt="USA" width="800"/>
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
+## Reference
+Preprint in BioRxiv [Characterizing geographical and temporal dynamics of novel coronavirus SARS-CoV-2 using informative subtype markers](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
+If you find our work helpful, please cite:
+```
+@article {Zhao2020.04.07.030759,
+	author = {Zhao, Zhengqiao and Sokhansanj, Bahrad A. and Malhotra, Charvi and Zheng, Kitty and Rosen, Gail L.},
+	title = {Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization},
+	elocation-id = {2020.04.07.030759},
+	year = {2020},
+	doi = {10.1101/2020.04.07.030759},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759},
+	eprint = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759.full.pdf},
+	journal = {bioRxiv}
+}
+
+```
+## Acknowledgement
+We would like to thank [GISAID](www.gisaid.org) for sharing the sequence data and metadata. We also gratefully acknowledge the authors, originating and submitting laboratories of the sequences from GISAID’s EpiFlu Database on which this research is based. The list is detailed in [here](acknowledgement_table.csv). All submitters of data may be contacted directly via the [GISAID](www.gisaid.org) website.

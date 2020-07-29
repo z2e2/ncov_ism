@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:
 
 def main():
     
-    parser = argparse.ArgumentParser(description='Informative Subtype Marker (ISM) is an efficient framework for genetic subtyping of a pandemic virus and implement it for SARS-CoV-2, the novel coronavirus that causes COVID-19.', prog='main')
+    parser = argparse.ArgumentParser(description='Informative Subtype Marker (ISM) is an efficient framework for genetic subtyping of a pandemic virus and implement it for SARS-CoV-2, the novel coronavirus that causes COVID-19.', prog='ncov_ism')
     subparsers = parser.add_subparsers(title='subcommands',
                                        description='the following subcommands \
                                     are available: build, analyze, visualize, default', 

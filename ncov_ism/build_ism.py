@@ -20,7 +20,9 @@ def build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLD
     position_list = pick_ISM_spots(H_list, null_freq_list, en_thres, null_thres)
 
     annotation_df = annotate_ISM(data_df, REFERENCE, position_list, reference_genbank_name)
-
+    
+    annotation_df.to_csv('{}/IMS_annotation.csv'.format(OUTPUT_FOLDER), index=False)
+    
     data_df['ISM'] = data_df.apply(lambda x, position_list=position_list: ''.join([x['sequence'][position[0]] for position in position_list]), axis=1)
     ISM_df = data_df.drop(['sequence'], axis=1)
 
