@@ -9,31 +9,30 @@ The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reported
 
 ## Entropy of viral sequences
 
-[comment]: # ![Fig 0](results/1_overall_entropy.pdf "Entropy analysis")
+<!--- ![Fig 0](results/1_overall_entropy.pdf "Entropy analysis") --->
 
 ## ISM distribution worldwide
 The following figure shows the major ISMs in selective countries/regions (in the legend next to each
 country/region, we show the date when a major ISM was first sequenced in that country/region). 
 ISMs with less than 5% abundance are plotted as “OTHER”. 
-<img src="results/1_regional_ISM.png" alt="regional" width="200"/>
 
-[comment]: # ![Fig 1](results/1_regional_ISM.png "Subtype composition in different locations worldwide")
+<img src="results/1_regional_ISM.png" alt="regional" width="800"/>
+
+<!--- ![Fig 1](results/1_regional_ISM.png "Subtype composition in different locations worldwide") --->
 
 ## ISM distribution in US
 The following figure shows the ISM distribution in the United States in 25 states. ISMs with less than 5% abundance are plotted as “OTHER”. 
 
-<img src="results/2_intra-US_ISM.png" alt="states" width="200"/>
+<img src="results/2_intra-US_ISM.png" alt="states" width="800"/>
 
-[comment]: # ![Fig 2](results/2_intra-US_ISM.png "Subtype composition in different locations in US")
+<!--- ![Fig 2](results/2_intra-US_ISM.png "Subtype composition in different locations in US") --->
 
 ## The dynamic of ISM in different locations
-The following figures show the relative abundance (%) of ISMs in DNA sequences from different regions as sampled over
-time.
+The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+<img src="results/3_ISM_growth_Mainland China.png" alt="China" width="800"/>
+The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+<img src="results/3_ISM_growth_France.png" alt="France" width="800"/>
+The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+<img src="results/3_ISM_growth_USA.png" alt="USA" width="800"/>
+<!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
-<img src="results/3_ISM_growth_USA.png" alt="USA" width="200"/>
-
-[comment]: # ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time")
-
-[comment]: # ![Fig 4](results/3_ISM_growth_Japan.png "the dynamic subtype composition in Japan over time")
-
-[comment]: # ![Fig 5](results/3_ISM_growth_Australia.png "the dynamic subtype composition in Australia over time")
