@@ -257,7 +257,7 @@ ISM abundance table is constructed for regions with more than 150 submissions. W
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
 ## Reference
-Preprint in BioRxiv [Characterizing geographical and temporal dynamics of novel coronavirus SARS-CoV-2 using informative subtype markers](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
+Preprint in BioRxiv [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
 If you find our work helpful, please cite:
 ```
 @article {Zhao2020.04.07.030759,
@@ -274,4 +274,4 @@ If you find our work helpful, please cite:
 
 ```
 ## Acknowledgement
-We would like to thank [GISAID](www.gisaid.org) for sharing the sequence data and metadata. We also gratefully acknowledge the authors, originating and submitting laboratories of the sequences from GISAID’s EpiFlu Database on which this research is based. The list is detailed in [here](acknowledgement_table.csv). All submitters of data may be contacted directly via the [GISAID](www.gisaid.org) website.
+We would like to thank [GISAID](www.gisaid.org) for sharing the sequence data and metadata. We also gratefully acknowledge the authors, originating and submitting laboratories of the sequences from GISAID’s EpiFlu Database on which this research is based. The list is detailed in [here](results/acknowledgement_table.txt). All submitters of data may be contacted directly via the [GISAID](www.gisaid.org) website.
