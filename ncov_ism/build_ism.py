@@ -21,13 +21,13 @@ def build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLD
 
     annotation_df = annotate_ISM(data_df, REFERENCE, position_list, reference_genbank_name)
     
-    annotation_df.to_csv('{}/IMS_annotation.csv'.format(OUTPUT_FOLDER), index=False)
+    annotation_df.to_csv('{}/ISM_annotation.csv'.format(OUTPUT_FOLDER), index=False)
     
     data_df['ISM'] = data_df.apply(lambda x, position_list=position_list: ''.join([x['sequence'][position[0]] for position in position_list]), axis=1)
     ISM_df = data_df.drop(['sequence'], axis=1)
 
     data_df.to_pickle('{}/data_df_without_correction.pkl'.format(OUTPUT_FOLDER))
-    ISM_df.to_csv('{}/IMS_df_without_correction.csv'.format(OUTPUT_FOLDER), index=False)
+    ISM_df.to_csv('{}/ISM_df_without_correction.csv'.format(OUTPUT_FOLDER), index=False)
 
     logging.info('Informative Subtype Marker picking: ISM Table saved.')
     
@@ -41,7 +41,7 @@ def build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLD
                  axis = 1)
 
     data_df.to_pickle('{}/data_df_with_correction.pkl'.format(OUTPUT_FOLDER))
-    ISM_df.to_csv('{}/IMS_df_with_correction.csv'.format(OUTPUT_FOLDER), index=False)
+    ISM_df.to_csv('{}/ISM_df_with_correction.csv'.format(OUTPUT_FOLDER), index=False)
     acknowledgement_table = ISM_df[['gisaid_epi_isl', 'date', 'segment', 'originating_lab', 'submitting_lab', 'authors', 'url', 'date_submitted']]
     acknowledgement_table.to_csv('{}/acknowledgement_table.txt'.format(OUTPUT_FOLDER), index = False)
     return ISM_df

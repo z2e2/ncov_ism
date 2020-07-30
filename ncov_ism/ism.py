@@ -122,7 +122,7 @@ def main():
         OUTPUT_FOLDER = args.o
         sampling_depth = args.sd
         REFERENCE_ID = 'EPI_ISL_402125'
-        ISM_df = pd.read_csv('{}/IMS_df_with_correction.csv'.format(INPUT_FOLDER))
+        ISM_df = pd.read_csv('{}/ISM_df_with_correction.csv'.format(INPUT_FOLDER))
         ISM_df['date'] = pd.to_datetime(ISM_df['date'])
         with open('{}/region_pie_chart.json'.format(INPUT_FOLDER), 'r') as fp:
             region_raw_count = json.load(fp)
@@ -215,7 +215,7 @@ def main():
         ISM_df['ISM_compressed'] = ISM_df.apply(lambda x, compressed_list=compressed_list, 
                               pos_dict=pos_to_idx: ''.join([x['ISM'][pos_dict[pos]] for pos in compressed_list]), 
                               axis = 1)
-        ISM_df.to_csv('{}/IMS_df_compressed.csv'.format(OUTPUT_FOLDER), index=False)
+        ISM_df.to_csv('{}/ISM_df_compressed.csv'.format(OUTPUT_FOLDER), index=False)
         ISM_df['ISM'] = ISM_df['ISM_compressed']
         region_raw_count, state_raw_count, count_dict = ISM_analysis(ISM_df, OUTPUT_FOLDER)
     

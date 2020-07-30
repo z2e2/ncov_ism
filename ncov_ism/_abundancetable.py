@@ -88,7 +88,7 @@ def region_pca_plot(INPUT_FOLDER, OUTPUT_FOLDER, sampling_depth=150):
     '''
     pca plot of ISM abundance table
     '''
-    ISM_df = pd.read_csv('{}/IMS_df_with_correction.csv'.format(INPUT_FOLDER))
+    ISM_df = pd.read_csv('{}/ISM_df_with_correction.csv'.format(INPUT_FOLDER))
     ISM_df['date'] = pd.to_datetime(ISM_df['date'])
     
     raw_table, n_row, n_ISM, country_to_continent, continent_to_color, idx_to_region = build_ISM_abundance_table(ISM_df, sampling_depth)
