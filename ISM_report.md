@@ -4,7 +4,9 @@ Drexel University EESI Lab, 2020
 Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu  
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
-###### Report 2020/07/29<!--- dividing line --->
+**Report created on 2020/07/29**
+
+<!--- dividing line --->
 
 ## Abstract
 The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reportedly 8.7 million confirmed cases worldwide by June 21, 2020. The global SARS-CoV-2 pandemic highlights the importance of tracking viral transmission dynamics in real-time. Through June 2020, researchers have obtained genetic sequences of SARS-CoV-2 from over 50 thousand samples from infected individuals worldwide. Since the virus readily mutates, each sequence of an infected individual contains useful information linked to the individual's exposure location and sample date. But, there are over 30,000 bases in the full SARS-CoV-2 genome, so tracking genetic variants on a whole-sequence basis becomes unwieldy. *ncov_ism* is a method to instead efficiently identify and label genetic variants, or "subtypes" of SARS-CoV-2. This method defines a compact set of nucleotide sites that characterize the most variable (and thus most informative) positions in the viral genomes sequenced from different individuals, called an Informative Subtype Marker or *ISM*. This tool defines viral subtypes for each ISM, and analyze the regional distribution of subtypes to track the progress of the pandemic.
@@ -161,7 +163,9 @@ Mapping ISM sites to the reference viral genome
     </tr>
   </tbody>
 </table>
-<!--- annotation table end ---><!--- dividing line --->
+<!--- annotation table end --->
+
+<!--- dividing line --->
 
 ## ISM distribution worldwide
 The following figure shows the major ISMs in selective countries/regions (in the legend next to each
@@ -178,6 +182,12 @@ The following figure shows the ISM distribution in the United States in 25 state
 <img src="results/2_intra-US_ISM.png" alt="states" width="800"/>
 
 <!--- ![Fig 2](results/2_intra-US_ISM.png "Subtype composition in different locations in US") --->
+
+## ISM abundance PCA analysis
+ISM abundance table is constructed for regions with more than 150 submissions. We then visualize the pattern of viral genetic variation by the first two principle components of the pairwise Bray-Curtis dissimilarity matrix between regions. Regions with similar genetic variation pattern are grouped together in the PCA plot.
+
+<img src="results/country_2d.png" alt="pca" width="800"/>
+
 
 ## The dynamic of ISM in different locations
 1. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
