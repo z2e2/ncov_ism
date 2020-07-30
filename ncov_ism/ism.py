@@ -17,7 +17,7 @@ def main():
     parser = argparse.ArgumentParser(description='Informative Subtype Marker (ISM) is an efficient framework for genetic subtyping of a pandemic virus and implement it for SARS-CoV-2, the novel coronavirus that causes COVID-19.', prog='ncov_ism')
     subparsers = parser.add_subparsers(title='subcommands',
                                        description='the following subcommands \
-                                    are available: build, analyze, visualize, default, ents', 
+                                    are available: build, analyze, visualize, default, ents, compress', 
                                     dest='subparser_name')
     # build
     build_parser = subparsers.add_parser("build")
@@ -80,6 +80,20 @@ def main():
     ents_parser.add_argument("-o", metavar="output",
                         help="Path to the output directory",
                         required=True, type=str)
+    # compress
+    compress_parser = subparsers.add_parser("compress")
+    compress_parser.add_argument("-i", metavar="input",
+                                 help="Path to ISM_df file built by 'ncov_ism build' command",
+                                 required=True, type=str)
+    compress_parser.add_argument("-a", metavar="annotation", 
+                                 help="Path to annotation file built by 'ncov_ism build' command", 
+                                 required=True, type=str)
+    compress_parser.add_argument("-p", metavar="position", 
+                                 help="Path to a comma separated file containing compressed positions", 
+                                 required=True, type=str)
+    compress_parser.add_argument("-o", metavar="output",
+                                 help="Path to the output directory",
+                                 required=True, type=str)
     args = parser.parse_args()
     if args.subparser_name == "build":
         MSA_FILE_NAME = args.i
@@ -141,8 +155,8 @@ def main():
                                                                                               ISM_FILTER_THRESHOLD=0.05,
                                                                                               ISM_TIME_SERIES_FILTER_THRESHOLD=0.025)
         REFERENCE_date = ISM_df[ISM_df['gisaid_epi_isl'] == REFERENCE_ID]['date'].min().date()
-        ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER)   
         region_pca_plot(INPUT_FOLDER, OUTPUT_FOLDER, sampling_depth)
+        ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER)   
         
     elif args.subparser_name == "default":
         MSA_FILE_NAME = args.i
@@ -182,8 +196,28 @@ def main():
                                                                                               ISM_FILTER_THRESHOLD=0.05,
                                                                                               ISM_TIME_SERIES_FILTER_THRESHOLD=0.025)
         REFERENCE_date = ISM_df[ISM_df['gisaid_epi_isl'] == REFERENCE_ID]['date'].min().date()
-        ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER)
         region_pca_plot(OUTPUT_FOLDER, OUTPUT_FOLDER, sampling_depth = 150)
+        ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER)
+    elif args.subparser_name == "compress":
+        ISM_df_path = args.i
+        annotation_df_path = args.a
+        compressed_position_path = args.p
+        OUTPUT_FOLDER = args.o
+        
+        ISM_df = pd.read_csv(ISM_df_path)
+        ISM_df['date'] = pd.to_datetime(ISM_df['date'])
+        annotation_df = pd.read_csv(annotation_df_path)
+        pos = annotation_df['Ref position'].tolist()
+        pos_to_idx = {pos[i]: i for i in range(len(pos))}
+        with open(compressed_position_path) as f:
+            compressed_list = [int(item) for item in f.read().split(',')]
+
+        ISM_df['ISM_compressed'] = ISM_df.apply(lambda x, compressed_list=compressed_list, 
+                              pos_dict=pos_to_idx: ''.join([x['ISM'][pos_dict[pos]] for pos in compressed_list]), 
+                              axis = 1)
+        ISM_df.to_csv('{}/IMS_df_compressed.csv'.format(OUTPUT_FOLDER), index=False)
+        ISM_df['ISM'] = ISM_df['ISM_compressed']
+        region_raw_count, state_raw_count, count_dict = ISM_analysis(ISM_df, OUTPUT_FOLDER)
     
     
 if __name__ == "__main__":

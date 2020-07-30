@@ -125,7 +125,7 @@ def region_pca_plot(INPUT_FOLDER, OUTPUT_FOLDER, sampling_depth=150):
         plt.text(X_2d[i, 0] + 0.015, X_2d[i, 1] + 0.015, idx_to_region[i], size=8)
         
     plt.xlim([-1.01, 2.5])
-    plt.legend(loc='best')
+    plt.legend(loc='lower right')
     plt.xlabel('PC1')
     plt.ylabel('PC2')
     plt.savefig('{}/country_2d.png'.format(OUTPUT_FOLDER), bbox_inches='tight')
