@@ -13,6 +13,8 @@ The following are required:
 - matplotlib=2.1.1
 - pandas=0.20.3
 - biopython=1.71
+- scipy=1.0.0
+- scikit-learn=0.19.1
 
 Conda installation:
 ```
@@ -39,7 +41,7 @@ ncov_ism default -i <multiple sequence alignment file> -m <metadata file> -o <ou
 The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reportedly 8.7 million confirmed cases worldwide by June 21, 2020. The global SARS-CoV-2 pandemic highlights the importance of tracking viral transmission dynamics in real-time. Through June 2020, researchers have obtained genetic sequences of SARS-CoV-2 from over 50 thousand samples from infected individuals worldwide. Since the virus readily mutates, each sequence of an infected individual contains useful information linked to the individual's exposure location and sample date. But, there are over 30,000 bases in the full SARS-CoV-2 genome, so tracking genetic variants on a whole-sequence basis becomes unwieldy. *ncov_ism* is a method to instead efficiently identify and label genetic variants, or "subtypes" of SARS-CoV-2. This method defines a compact set of nucleotide sites that characterize the most variable (and thus most informative) positions in the viral genomes sequenced from different individuals, called an Informative Subtype Marker or *ISM*. This tool defines viral subtypes for each ISM, and analyze the regional distribution of subtypes to track the progress of the pandemic.
 
 ## Reference
-Preprint in BioRxiv [Characterizing geographical and temporal dynamics of novel coronavirus SARS-CoV-2 using informative subtype markers](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
+Preprint in BioRxiv [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
 If you find our work helpful, please cite:
 ```
 @article {Zhao2020.04.07.030759,

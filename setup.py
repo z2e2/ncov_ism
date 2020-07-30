@@ -1,4 +1,3 @@
-# https://wiki.python.org/moin/Distutils/Tutorial
 from setuptools import setup
 import ncov_ism
 
@@ -18,7 +17,9 @@ setup(name='ncov_ism',
         license='BSD',
 	packages=['ncov_ism'],
 	install_requires=['matplotlib>=2.1.1','pandas>=0.20.3',
-                          'numpy>=1.13.3','biopython>=1.71'],
+                      'numpy>=1.13.3','biopython>=1.71',
+                      'scikit-learn>=0.19.1', 'scipy>=1.0.0'
+                     ],
 	entry_points = {
         'console_scripts': ['ncov_ism=ncov_ism.ism:main'],
     },

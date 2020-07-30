@@ -5,20 +5,74 @@ Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
 **Report created on 2020/07/29**
-
 <!--- dividing line --->
 
 ## Abstract
 The novel coronavirus responsible for COVID-19, SARS-CoV-2, expanded to reportedly 8.7 million confirmed cases worldwide by June 21, 2020. The global SARS-CoV-2 pandemic highlights the importance of tracking viral transmission dynamics in real-time. Through June 2020, researchers have obtained genetic sequences of SARS-CoV-2 from over 50 thousand samples from infected individuals worldwide. Since the virus readily mutates, each sequence of an infected individual contains useful information linked to the individual's exposure location and sample date. But, there are over 30,000 bases in the full SARS-CoV-2 genome, so tracking genetic variants on a whole-sequence basis becomes unwieldy. *ncov_ism* is a method to instead efficiently identify and label genetic variants, or "subtypes" of SARS-CoV-2. This method defines a compact set of nucleotide sites that characterize the most variable (and thus most informative) positions in the viral genomes sequenced from different individuals, called an Informative Subtype Marker or *ISM*. This tool defines viral subtypes for each ISM, and analyze the regional distribution of subtypes to track the progress of the pandemic.
 
-## Entropy of viral sequences
+## Entropy time series analysis
+The following figure shows how entropy values at different positions change over time.
 
-<!--- ![Fig 0](results/1_overall_entropy.pdf "Entropy analysis") --->
+<img src="results/0_Entropy_time_series_analysis.png" alt="ents" width="800"/>
+
+A few covarying positions are identified
+
+<!--- covarying table starts --->
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Covarying group</th>
+      <th>Coverage</th>
+      <th>NT configurations</th>
+      <th>Representative position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>241;3037;14408;23403</td>
+      <td>0.970267</td>
+      <td>TTTG;CCCA</td>
+      <td>23403</td>
+    </tr>
+    <tr>
+      <td>2480;2558</td>
+      <td>0.994219</td>
+      <td>AC;GT</td>
+      <td>2558</td>
+    </tr>
+    <tr>
+      <td>8782;28144</td>
+      <td>0.992833</td>
+      <td>CT;TC</td>
+      <td>8782</td>
+    </tr>
+    <tr>
+      <td>10097;23731</td>
+      <td>0.998056</td>
+      <td>GC;AT</td>
+      <td>10097</td>
+    </tr>
+    <tr>
+      <td>17747;17858;18060</td>
+      <td>0.990095</td>
+      <td>CAC;TGT</td>
+      <td>18060</td>
+    </tr>
+    <tr>
+      <td>28881;28882;28883</td>
+      <td>0.994557</td>
+      <td>GGG;AAC</td>
+      <td>28881</td>
+    </tr>
+  </tbody>
+</table>
+<!--- covarying table ends --->
+<!--- dividing line --->
 
 ## ISM positions
-Mapping ISM sites to the reference viral genome
+The following table shows the annotations of ISM sites using the reference viral genome.
 
-<!--- annotation table start --->
+<!--- annotation table starts --->
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -163,8 +217,7 @@ Mapping ISM sites to the reference viral genome
     </tr>
   </tbody>
 </table>
-<!--- annotation table end --->
-
+<!--- annotation table ends --->
 <!--- dividing line --->
 
 ## ISM distribution worldwide

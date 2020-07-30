@@ -278,6 +278,8 @@ def annotate_ISM(data_df, REFERENCE, position_list, reference_genbank_name="data
                 if_silence = False
         res['Ref position'].append(ref_index)
         res['Entropy'].append(entropy)
+        if name is None:
+            name = 'Non-coding'
         res['Gene'].append(name)
         res['Is silent'].append(if_silence)
     annotation_df = pd.DataFrame.from_dict(res)
