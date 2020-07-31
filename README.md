@@ -21,6 +21,8 @@ Conda installation:
 conda create -n ISM python=3.5.4 biopython=1.71 pandas=0.20.3 matplotlib=2.1.1
 source activate ISM
 git clone https://github.com/z2e2/ncov_ism.git
+cd ncov_ism
+python setup.py install
 ```
 
 ## Tutorial
