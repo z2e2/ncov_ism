@@ -4,7 +4,7 @@ Drexel University EESI Lab, 2020
 Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu  
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
-**Report created on 2020/07/29**
+**Report created on 2020/07/31**
 <!--- dividing line --->
 
 ## Abstract
@@ -86,7 +86,7 @@ The following table shows the annotations of ISM sites using the reference viral
     <tr>
       <td>241</td>
       <td>0.800329</td>
-      <td>NaN</td>
+      <td>Non-coding</td>
       <td>True</td>
     </tr>
     <tr>
