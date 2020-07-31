@@ -18,19 +18,15 @@ The following are required:
 
 Conda installation:
 ```
-conda create -n ISM python=3.5.4 biopython=1.71 pandas=0.20.3 matplotlib=2.1.1
+conda create -n ISM python=3.5.4 biopython=1.71 pandas=0.20.3 matplotlib=2.1.1 scipy=1.0.0 scikit-learn=0.19.1
 source activate ISM
 git clone https://github.com/z2e2/ncov_ism.git
 cd ncov_ism
 python setup.py install
 ```
-
-## Tutorial
-The jupyter notebook demo can be found at [source code](demo.ipynb)
-
 ## Running ncov_ism
 #### Input Data
-SARS-CoV-2 (hCoV-19) sequences and metadata are made available at [GISAID](www.gisaid.org). Our pipeline takes the multiple sequence alignment results and metadata as input which are both available at [GISAID](www.gisaid.org).
+SARS-CoV-2 (hCoV-19) sequences and metadata are made available at [GISAID](www.gisaid.org). Our pipeline takes the multiple sequence alignment results and metadata as input which are both available at [GISAID](www.gisaid.org). The multiple sequence alignment results of sequences are required. 
 #### Reference genomes
 The default reference sequences is [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2/) in NCBI. It also corresponds to *EPI_ISL_402125* in [GISAID](www.gisaid.org) hCoV-19 database.
 #### Quick start
