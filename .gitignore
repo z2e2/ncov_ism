@@ -9,3 +9,5 @@ build/
 *.csv
 *.json
 *.pkl
+*.tar.*
+*.gz

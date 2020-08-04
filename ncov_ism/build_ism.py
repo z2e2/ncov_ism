@@ -2,8 +2,31 @@ from ._loaddata import load_data
 from ._pickism import entropy_analysis, pick_ISM_spots, annotate_ISM, ISM_disambiguation
 from ._analyzeism import ISM_analysis
 
+import os
+import pandas as pd
 import logging
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+
+def build_from_existing(REFERENCE, H_list, OUTPUT_FOLDER):
+    if not os.path.isfile('{}/ISM_annotation.txt'.format(OUTPUT_FOLDER)):
+        return None
+    
+    annotation_df = pd.read_csv('{}/ISM_annotation.txt'.format(OUTPUT_FOLDER))
+    
+    ref_to_align = {}
+    index = 0
+    for idx, base in enumerate(REFERENCE[1]):
+        if base != '-':
+            ref_to_align[index] = idx
+            index += 1
+    
+    min_en = 100
+    for ref_idx in annotation_df['Ref position'].tolist():
+        tmp_en = H_list[ref_to_align[ref_idx-1]]
+        if tmp_en < min_en:
+            min_en = tmp_en
+            
+    return min_en
 
 def build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLDER, REFERENCE_ID, en_thres, null_thres):
     '''
@@ -17,6 +40,15 @@ def build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLD
     REFERENCE_date = data_df[data_df['gisaid_epi_isl'] == REFERENCE_ID]['date'].min().date()
 
     H_list, null_freq_list = entropy_analysis(data_df)
+    
+    ## ===== choose entropy such that all old positions are preserved ===== ##
+    en_min = build_from_existing(REFERENCE, H_list, OUTPUT_FOLDER)
+    if en_min is not None and en_min < en_thres:
+        en_thres = en_min - 0.0001
+        logging.info('Informative Subtype Marker picking: using entropy threshold = {} to preserve all existing ISM positions'.format(en_thres))
+    
+    ## ===== choose entropy such that all old positions are preserved ===== ##
+    
     position_list = pick_ISM_spots(H_list, null_freq_list, en_thres, null_thres)
 
     annotation_df = annotate_ISM(data_df, REFERENCE, position_list, reference_genbank_name)
