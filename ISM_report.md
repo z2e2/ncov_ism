@@ -253,11 +253,11 @@ ISM abundance table is constructed for regions with more than 150 submissions. W
 
 <img src="results/3_ISM_growth_Mainland China.png" alt="China" width="800"/>
 
-2. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+2. The relative abundance (%) of ISMs in DNA sequences from France as sampled over time.
 
 <img src="results/3_ISM_growth_France.png" alt="France" width="800"/>
 
-3. The relative abundance (%) of ISMs in DNA sequences from Mainland China as sampled over time.
+3. The relative abundance (%) of ISMs in DNA sequences from the USA as sampled over time.
 
 <img src="results/3_ISM_growth_USA.png" alt="USA" width="800"/>
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
