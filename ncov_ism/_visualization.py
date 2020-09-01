@@ -1,5 +1,6 @@
 import logging
 import matplotlib
+import pickle
 matplotlib.use('Agg')
 import matplotlib.colors as mcolors
 import numpy as np
@@ -315,6 +316,7 @@ def ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_p
     for idx, ISM in enumerate(ISM_list):
         COLOR_DICT[ISM] = color_map[idx]
     COLOR_DICT['OTHER'] = 'gray'
+    pickle.dump(COLOR_DICT, open('COLOR_DICT.pkl', 'wb'))
     global_color_map(COLOR_DICT, ISM_list, OUTPUT_FOLDER)
     
     DPI = 100
