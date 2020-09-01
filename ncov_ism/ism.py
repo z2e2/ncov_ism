@@ -130,7 +130,7 @@ def main():
             state_raw_count = json.load(fp)
         with open('{}/region_time_series.json'.format(INPUT_FOLDER), 'r') as fp:
             count_dict = json.load(fp)
-        region_list = ['Mainland China', 'Japan', 'Singapore', 'Hong Kong', 'India',
+        region_list = ['Mainland China', 'Japan', 'South Korea', 'Hong Kong', 'India',
                'Australia', 'New Zealand', 'Brazil', 'USA', 'Canada', 
                'United Kingdom', 'Iceland', 'Belgium', 'Netherlands', 'Denmark',
                'France', 'Italy', 'Spain', 'Germany', 'Russia',
