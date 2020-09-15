@@ -41,22 +41,22 @@ A few covarying positions are identified
       <td>28881</td>
     </tr>
     <tr>
-      <td>1059;25563</td>
-      <td>0.939401</td>
-      <td>CG;TT</td>
-      <td>25563</td>
-    </tr>
-    <tr>
       <td>1163;7540;16647;18555;22992;23401</td>
       <td>0.972530</td>
       <td>ATGCGG;TCTTAA</td>
       <td>1163</td>
     </tr>
     <tr>
-      <td>2480;2558;10097;15324;17747;17858;18060;18877;...</td>
-      <td>0.792958</td>
-      <td>ACGCCACCTCCC;ACACCACCTTCC</td>
+      <td>10097;18877;19839;23731;27964</td>
+      <td>0.901329</td>
+      <td>GCTCC;ACTTC</td>
       <td>10097</td>
+    </tr>
+    <tr>
+      <td>2480;2558;15324;17747;17858</td>
+      <td>0.943233</td>
+      <td>ACCCA;ACCTG</td>
+      <td>2558</td>
     </tr>
     <tr>
       <td>8782;28144</td>
