@@ -250,3 +250,68 @@ def ISM_analysis(ISM_df, output_folder):
     logging.info('ISM Analysis in progress: DONE.')
     
     return region_raw_count, state_raw_count, count_dict
+
+def customized_ISM_analysis(ISM_df, region_list, output_folder):
+    """
+    Informative Subtype Marker analysis of ISM table
+    Parameters
+    ----------
+    ISM_df: pandas.DataFrame
+        Pandas dataframe containing ISM column
+    output_folder: str
+        path to the output folder
+    Returns
+    -------
+    region_raw_count: dictionary
+        ISM frequency per region
+    state_raw_count: dictionary
+        ISM frequency per state
+    count_dict: dictionary
+        ISM frequency time series per region
+    """
+    logging.info('ISM Analysis in progress: ...')
+    
+    region_first_date = ISM_df.groupby(['country/region','ISM']).agg({'date': 'min'}).reset_index()
+    region_ISM_count = ISM_df.groupby('country/region')['ISM'].value_counts().to_frame()
+    region_ISM_count = region_ISM_count.rename(columns={'ISM': 'count'}).reset_index()
+    region_ISM_count_date = region_ISM_count.join(region_first_date.set_index(['country/region','ISM']), on = ['country/region','ISM'],how = 'left')
+    region_list = ISM_df['country/region'].unique().tolist()
+
+    region_raw_count = OrderedDict() 
+    for idx, region in enumerate(region_list):
+        dict_freq = regional_analysis(region_ISM_count_date, region)
+        region_raw_count[region] = dict_freq
+
+    with open('{}/region_pie_chart.json'.format(output_folder), 'w') as fp:
+        json.dump(region_raw_count, fp)
+    
+    logging.info('ISM Analysis in progress: regional analysis completed.')
+    
+    start_date = ISM_df['date'].min().date()
+    end_date = ISM_df['date'].max().date()
+#     end_date = datetime.date(int(GISAID_DATA_DATE[:4]), int(GISAID_DATA_DATE[4:6]), int(GISAID_DATA_DATE[6:]))
+    delta = datetime.timedelta(days=1)
+    region_list = ISM_df['country/region'].unique().tolist()
+    count_dict = OrderedDict() 
+
+    while start_date <= end_date:
+        df_tmp = time_subset(ISM_df, str(ISM_df['date'].min().date()), str(start_date))
+        if df_tmp.shape[0] == 0:
+            start_date += delta
+            continue
+        df_tmp_tmp = frequency_count(df_tmp)
+        dict_freq = OrderedDict() 
+        for region in region_list:
+            regional_dict_freq = regional_timeseries_analysis(df_tmp_tmp, region)
+            dict_freq[region] = regional_dict_freq
+        count_dict[str(start_date)] = dict_freq
+        start_date += delta
+
+    with open('{}/region_time_series.json'.format(output_folder), 'w') as fp:
+        json.dump(count_dict, fp)
+    
+    logging.info('ISM Analysis in progress: time series analysis completed.')
+    
+    logging.info('ISM Analysis in progress: DONE.')
+    
+    return region_raw_count, count_dict

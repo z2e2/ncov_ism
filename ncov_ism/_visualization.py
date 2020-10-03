@@ -126,6 +126,58 @@ def ISM_visualization(region_raw_count, state_raw_count, count_dict, region_list
         date_list.append(date)
     return ISM_set, region_pie_chart, state_pie_chart, count_list, date_list
 
+def customized_ISM_visualization(region_raw_count, count_dict, region_list, output_folder, 
+                                 ISM_FILTER_THRESHOLD=0.05, ISM_TIME_SERIES_FILTER_THRESHOLD=0.025):
+    '''
+    Informative Subtype Marker analysis visualization
+    Parameters
+    ----------
+    region_raw_count: dictionary
+        ISM frequency per region
+    state_raw_count: dictionary
+        ISM frequency per state
+    count_dict: dictionary
+        ISM frequency time series per region
+    region_list: list
+        regions of interest
+    state_list: list
+        states of interest
+    time_series_region_list: list
+        regions of interest for time series analysis
+    output_folder: str
+        path to the output folder
+    ISM_FILTER_THRESHOLD: float
+        ISM filter threshold
+    ISM_TIME_SERIES_FILTER_THRESHOLD: float
+        ISM filter threshold for time series
+    Returns
+    -------
+    Objects for downstream visualization
+    '''
+    ISM_set = set([])
+
+    region_pie_chart = {}
+    for idx, region in enumerate(region_list):
+        dict_freq_filtered = ISM_filter(region_raw_count[region], ISM_FILTER_THRESHOLD)
+        region_pie_chart[region] = dict_freq_filtered
+        ISM_set.update(dict_freq_filtered.keys())
+
+    count_list = []
+    date_list = []
+    
+    sorted_date = sorted(count_dict.keys())
+
+    for date in sorted_date:
+        dict_freq = {}
+        for region in region_list:
+            regional_dict_freq = count_dict[date][region]
+            dict_freq_filtered = ISM_time_series_filter(regional_dict_freq, ISM_TIME_SERIES_FILTER_THRESHOLD )
+            ISM_set.update(list(dict_freq_filtered.keys()))
+            dict_freq[region] = dict_freq_filtered
+        count_list.append(dict_freq)
+        date_list.append(date)
+    return ISM_set, region_pie_chart, count_list, date_list
+
 def get_color_names(CSS4_COLORS, num_colors):
     '''
     Prepare colors for each ISM.
@@ -450,4 +502,99 @@ def ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_p
     matplotlib.rc('font', **font) 
 
     for region in time_series_region_list:
+        regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list, COLOR_DICT, OUTPUT_FOLDER)
+
+def customized_ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, REFERENCE_date, count_list, date_list, OUTPUT_FOLDER):
+    '''
+    Generate figures for ISM analysis.
+    '''
+    ISM_index = {}
+    idx = 0
+    for ISM, counts in ISM_df['ISM'].value_counts().items():
+        ISM_index[ISM] = idx
+        idx += 1
+
+    logging.info('{} ISMs will show up in the visualizations'.format(len(ISM_set)))
+    ISM_list = []
+    for ISM in ISM_set:
+        if ISM == 'OTHER':
+            continue
+        ISM_list.append((ISM, ISM_index[ISM]))
+    ISM_list = sorted(ISM_list, key = lambda x: x[1])
+    ISM_list = [item[0] for item in ISM_list]
+
+    color_map = get_color_names(CSS4_COLORS, len(ISM_list))
+    COLOR_DICT = {}
+    for idx, ISM in enumerate(ISM_list):
+        COLOR_DICT[ISM] = color_map[idx]
+    COLOR_DICT['OTHER'] = 'gray'
+    pickle.dump(COLOR_DICT, open('COLOR_DICT.pkl', 'wb'))
+    global_color_map(COLOR_DICT, ISM_list, OUTPUT_FOLDER)
+    
+    DPI = 100
+    fig = plt.figure(figsize=(25, 15))   
+
+    wedges_list = []
+    for idx, region in enumerate(region_list):
+        dict_freq = region_pie_chart[region]
+        total = sum([dict_freq[ISM][1] for ISM in dict_freq])
+        labels = []
+        sizes = []
+        colors = []
+
+        for ISM in dict_freq:
+            if ISM == 'OTHER':
+                continue
+            labels.append('{}: {}'.format(ISM, dict_freq[ISM][0]))
+            colors.append(COLOR_DICT[ISM])
+            sizes.append(dict_freq[ISM][1])
+        if 'OTHER' in dict_freq:
+            labels.append('OTHER')
+            colors.append(COLOR_DICT['OTHER'])
+            sizes.append(dict_freq['OTHER'][1])
+
+        ax=plt.subplot(5, 5, idx+1)
+        wedges, labels = plot_pie_chart(sizes, labels, colors, ax)
+        ax.set_title(region)
+        wedges_list.append((wedges, labels))
+
+    labels_handles = {}
+    handles_OTHER = None
+    for wedges, labels in wedges_list:
+        for idx, label in enumerate(labels):
+            label = label.split(':')[0]
+            if label == 'OTHER':
+                handles_OTHER = [wedges[idx], label]
+                continue
+            if label not in labels_handles:
+                labels_handles[label] = wedges[idx]
+    if handles_OTHER:
+        handles_list = list(labels_handles.values()) + [handles_OTHER[0]]
+        labels_list = list(labels_handles.keys()) + [handles_OTHER[1]]
+        fig.legend(
+          handles_list,
+          labels_list,
+          bbox_to_anchor=(0.82, 0.25),
+          bbox_transform=plt.gcf().transFigure,
+          ncol=5,
+          prop={'family': monospace_font['fontname']}
+        )
+    else:
+        fig.legend(
+          labels_handles.values(),
+          labels_handles.keys(),
+          bbox_to_anchor=(0.82, 0.25),
+          bbox_transform=plt.gcf().transFigure,
+          ncol=5,
+          prop={'family': monospace_font['fontname']}
+        )
+    plt.savefig('{}/1_regional_ISM.png'.format(OUTPUT_FOLDER), bbox_inches='tight', dpi=DPI, transparent=True)
+    plt.close(fig)
+    
+    font = {'family': 'sans-serif', # Helvetica
+            'size'   : 25}
+
+    matplotlib.rc('font', **font) 
+
+    for region in region_list:
         regional_growth_plot(region, ISM_df, REFERENCE_date, count_list, date_list, COLOR_DICT, OUTPUT_FOLDER)
