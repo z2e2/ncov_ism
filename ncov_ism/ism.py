@@ -5,11 +5,11 @@ import pandas as pd
 from ._loaddata import load_data
 from ._pickism import entropy_analysis, pick_ISM_spots, annotate_ISM, ISM_disambiguation
 from ._entropy_time_series_anlysis import entropy_time_series_analysis
-from ._analyzeism import ISM_analysis
-from ._visualization import ISM_visualization, ISM_plot
-from .build_ism import build_ISM
+from ._analyzeism import ISM_analysis, customized_ISM_analysis
+from ._visualization import ISM_visualization, ISM_plot, customized_ISM_visualization, customized_ISM_plot
+from .build_ism import build_ISM, build_from_existing
 from ._abundancetable import region_pca_plot
-
+from .CustomizedISM import CustomizedISM
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
 def main():
@@ -94,6 +94,35 @@ def main():
     compress_parser.add_argument("-o", metavar="output",
                                  help="Path to the output directory",
                                  required=True, type=str)
+    # customized
+    customized_parser = subparsers.add_parser("customized")
+    customized_parser.add_argument("-i", metavar="input",
+                                   help="Multiple sequence alignment results in fasta format",
+                                   required=True, type=str)
+    customized_parser.add_argument("-m", metavar="metadata",
+                                   help="Metadata in tsv format",
+                                   required=True, type=str)
+    customized_parser.add_argument("-id", metavar="id_column", 
+                                   help="column name with unique sequence identification number in the metadata", 
+                                   default='gisaid_epi_isl', required=False, type=str)
+    customized_parser.add_argument("-loc", metavar="location_column", 
+                                   help="column name with location/region/country in the metadata", 
+                                   default='country', required=False, type=str)
+    customized_parser.add_argument("-o", metavar="output",
+                                   help="Path to the output directory",
+                                   required=True, type=str)
+    customized_parser.add_argument("-gb", metavar="genbank",
+                                   help="genbank file for reference sequence",
+                                   default='data/covid-19-genbank.gb', required=False, type=str)
+    customized_parser.add_argument("-r", metavar="referenceId", 
+                                   help="accession number of the reference sequence", 
+                                   default='EPI_ISL_402125', required=False, type=str)
+    customized_parser.add_argument("-e", metavar="entropy", help="entropy threshold", 
+                                   default=0.2222, required=False, type=float)
+    customized_parser.add_argument("-n", metavar="nullFreq", help="null frequency threshold", 
+                                   default=0.25, required=False, type=float)
+    customized_parser.add_argument("-tg", metavar="target", help="path to the target regions for visualization", 
+                                   default='regions_to_visualize.txt', required=False, type=str)
     args = parser.parse_args()
     if args.subparser_name == "build":
         MSA_FILE_NAME = args.i
@@ -169,6 +198,7 @@ def main():
         ISM_df = build_ISM(MSA_FILE_NAME, META_FILE_NAME, reference_genbank_name, OUTPUT_FOLDER, 
                    REFERENCE_ID, en_thres, null_thres)
         entropy_time_series_analysis(OUTPUT_FOLDER, OUTPUT_FOLDER, REFERENCE_ID)
+        
         region_raw_count, state_raw_count, count_dict = ISM_analysis(ISM_df, OUTPUT_FOLDER)
         
         region_list = ['Mainland China', 'Japan', 'Singapore', 'Hong Kong', 'India',
@@ -198,6 +228,68 @@ def main():
         REFERENCE_date = ISM_df[ISM_df['gisaid_epi_isl'] == REFERENCE_ID]['date'].min().date()
         region_pca_plot(OUTPUT_FOLDER, OUTPUT_FOLDER, sampling_depth = 150)
         ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, state_list, state_pie_chart, REFERENCE_date, time_series_region_list, count_list, date_list, OUTPUT_FOLDER)
+    elif args.subparser_name == "customized":
+        MSA_FILE_NAME = args.i
+        META_FILE_NAME = args.m
+        id_col = args.id
+        loc_col = args.loc
+        OUTPUT_FOLDER = args.o
+        reference_genbank_name = args.gb
+        REFERENCE_ID = args.r
+        en_thres = args.e
+        null_thres = args.n
+        region_list = open(args.tg).read().strip().split(',')
+        
+        customized_ism = CustomizedISM(MSA_FILE_NAME, META_FILE_NAME, id_col, loc_col, OUTPUT_FOLDER, 
+                                       reference_genbank_name, REFERENCE_ID, en_thres, null_thres, 
+                                       region_list)
+        logging.info('loading genomic sequences and metadata: ...')
+        seq_df = customized_ism.read_alignment()
+        data_df = customized_ism.merge_metadata(seq_df)
+        
+        REFERENCE = (REFERENCE_ID, data_df[data_df[id_col] == REFERENCE_ID]['sequence'].iloc[0])
+        REFERENCE_date = data_df[data_df[id_col] == REFERENCE_ID]['date'].min().date()
+        
+        H_list, null_freq_list = entropy_analysis(data_df)
+        
+        ## ===== for default, choose entropy such that all old positions are preserved ===== ##
+        en_min = build_from_existing(REFERENCE, H_list, OUTPUT_FOLDER)
+        if en_min is not None and en_thres == 0.2222:
+            en_thres = en_min - 0.0001
+            logging.info('Informative Subtype Marker picking: using entropy threshold = {} to preserve all existing ISM positions'.format(en_thres))
+        ## ===== for default, choose entropy such that all old positions are preserved ===== ##
+        
+        position_list = pick_ISM_spots(H_list, null_freq_list, en_thres, null_thres)
+        annotation_df = annotate_ISM(data_df, REFERENCE, position_list, reference_genbank_name)
+        annotation_df.to_csv('{}/ISM_annotation.txt'.format(OUTPUT_FOLDER), index=False)
+        data_df['ISM'] = data_df.apply(lambda x, position_list=position_list: ''.join([x['sequence'][position[0]] for position in position_list]), axis=1)
+        ISM_df = data_df.drop(['sequence'], axis=1)
+        data_df.to_pickle('{}/data_df_without_correction.pkl'.format(OUTPUT_FOLDER))
+        ISM_df.to_csv('{}/ISM_df_without_correction.csv'.format(OUTPUT_FOLDER), index=False)
+        logging.info('Informative Subtype Marker picking: ISM Table saved.')
+        ISM_error_correction_partial, ISM_error_correction_full = ISM_disambiguation(ISM_df, THRESHOLD=0)
+
+        ISM_df['ISM'] = ISM_df.apply(lambda x, 
+                 error_correction=ISM_error_correction_partial: error_correction[x['ISM']] if x['ISM'] in error_correction else x['ISM'],
+                 axis = 1)
+        data_df['ISM'] = data_df.apply(lambda x, 
+                     error_correction=ISM_error_correction_partial: error_correction[x['ISM']] if x['ISM'] in error_correction else x['ISM'],
+                     axis = 1)
+
+        data_df.to_pickle('{}/data_df_with_correction.pkl'.format(OUTPUT_FOLDER))
+        ISM_df.to_csv('{}/ISM_df_with_correction.csv'.format(OUTPUT_FOLDER), index=False)
+        
+        ISM_df['country/region'] = ISM_df[loc_col]
+    
+        customized_ism.entropy_time_series_analysis(data_df) 
+        
+        region_raw_count, count_dict = customized_ISM_analysis(ISM_df, region_list, OUTPUT_FOLDER)
+        ISM_set, region_pie_chart, count_list, date_list = customized_ISM_visualization(region_raw_count, count_dict, region_list, OUTPUT_FOLDER, 
+                                                                                        ISM_FILTER_THRESHOLD=0.05, ISM_TIME_SERIES_FILTER_THRESHOLD=0.025)
+
+        REFERENCE_date = ISM_df[ISM_df[id_col] == REFERENCE_ID]['date'].min().date()
+        #region_pca_plot(OUTPUT_FOLDER, OUTPUT_FOLDER, sampling_depth = 150)
+        customized_ISM_plot(ISM_df, ISM_set, region_list, region_pie_chart, REFERENCE_date, count_list, date_list, OUTPUT_FOLDER)
     elif args.subparser_name == "compress":
         ISM_df_path = args.i
         annotation_df_path = args.a
