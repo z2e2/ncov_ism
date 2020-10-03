@@ -106,11 +106,11 @@ class CustomizedISM:
                 FLAG = False
 
         for start, end in time_list:
-            data_df = time_subset(data_df_all, start, end)
+            data_df = time_subset(data_df_all, str(MIN_DATE), end)
             if data_df.shape[0] == 0:
                 continue
-            print('Entropy Time Series Analysis: processing data between {} and {} ({} sequences).'.format(start, end, data_df.shape[0]))
+            print('Entropy Time Series Analysis: processing data between {} and {} ({} sequences).'.format(str(MIN_DATE), end, data_df.shape[0]))
             H_list, null_freq_list = entropy_analysis(data_df)
             H_list = np.array(H_list)
             null_freq_list = np.array(null_freq_list)
-            pickle.dump([H_list, null_freq_list], open('{}/ENTS_{}_{}.pkl'.format(self.OUTPUT_FOLDER, start, end), 'wb'))
+            pickle.dump([H_list, null_freq_list], open('{}/ENTS_{}_{}.pkl'.format(self.OUTPUT_FOLDER, str(MIN_DATE), end), 'wb'))
