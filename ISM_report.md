@@ -4,7 +4,7 @@ Drexel University EESI Lab, 2020
 Maintainer: Zhengqiao Zhao, zz374 at drexel dot edu  
 Owner: Gail Rosen, gailr at ece dot drexel dot edu  
 
-**Report created on 2020/09/22**
+**Report created on 2020/10/13**
 <!--- dividing line --->
 
 ## Abstract
@@ -30,39 +30,51 @@ A few covarying positions are identified
   <tbody>
     <tr>
       <td>241;3037;14408;23403</td>
-      <td>0.967705</td>
+      <td>0.965727</td>
       <td>TTTG;CCCA</td>
       <td>23403</td>
     </tr>
     <tr>
       <td>28881;28882;28883</td>
-      <td>0.993409</td>
+      <td>0.990580</td>
       <td>GGG;AAC</td>
       <td>28881</td>
     </tr>
     <tr>
-      <td>1163;7540;16647;18555;22992;23401</td>
-      <td>0.971687</td>
-      <td>ATGCGG;TCTTAA</td>
-      <td>1163</td>
+      <td>8782;28144</td>
+      <td>0.992214</td>
+      <td>CT;TC</td>
+      <td>8782</td>
     </tr>
     <tr>
-      <td>10097;18877;19839;23731;27964</td>
-      <td>0.901387</td>
-      <td>GCTCC;ACTTC</td>
+      <td>313;4002;13536;19839;26735</td>
+      <td>0.908351</td>
+      <td>CCCTC;CCCCC</td>
+      <td>19839</td>
+    </tr>
+    <tr>
+      <td>10097;18877;23731;27964</td>
+      <td>0.921300</td>
+      <td>GCCC;ACTC</td>
       <td>10097</td>
     </tr>
     <tr>
       <td>2480;2558;15324;17747;17858</td>
-      <td>0.944894</td>
+      <td>0.956942</td>
       <td>ACCCA;ACTCA</td>
-      <td>2558</td>
+      <td>15324</td>
     </tr>
     <tr>
-      <td>8782;28144</td>
-      <td>0.990716</td>
-      <td>CT;TC</td>
-      <td>8782</td>
+      <td>1163;7540;16647;18555;22992;23401</td>
+      <td>0.966966</td>
+      <td>ATGCGG;TCTTAA</td>
+      <td>1163</td>
+    </tr>
+    <tr>
+      <td>204;445;6286;21255;22227;26801;27944;28932;29645</td>
+      <td>0.908273</td>
+      <td>GTCGCCCCG;-TCGCCCCG</td>
+      <td>26801</td>
     </tr>
   </tbody>
 </table>
@@ -84,201 +96,279 @@ The following table shows the annotations of ISM sites using the reference viral
   </thead>
   <tbody>
     <tr>
-      <td>241</td>
-      <td>0.697045</td>
+      <td>204</td>
+      <td>0.135282</td>
       <td>Non-coding</td>
       <td>True</td>
     </tr>
     <tr>
+      <td>241</td>
+      <td>0.597396</td>
+      <td>Non-coding</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>313</td>
+      <td>0.157814</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>445</td>
+      <td>0.195191</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
       <td>1059</td>
-      <td>0.684184</td>
+      <td>0.690077</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>1163</td>
-      <td>0.280091</td>
+      <td>0.374344</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>2480</td>
-      <td>0.159690</td>
+      <td>0.127924</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>2558</td>
-      <td>0.167364</td>
+      <td>0.134340</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>3037</td>
-      <td>0.704923</td>
+      <td>0.600826</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>4002</td>
+      <td>0.137442</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>6286</td>
+      <td>0.199466</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>7540</td>
-      <td>0.246049</td>
+      <td>0.330197</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>8782</td>
-      <td>0.334225</td>
+      <td>0.280431</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>10097</td>
-      <td>0.259207</td>
+      <td>0.254639</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>11083</td>
-      <td>0.486024</td>
+      <td>0.449513</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
+      <td>13536</td>
+      <td>0.142772</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
       <td>14408</td>
-      <td>0.710616</td>
+      <td>0.605935</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>14805</td>
-      <td>0.385279</td>
+      <td>0.321740</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>15324</td>
-      <td>0.164933</td>
+      <td>0.159445</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>16647</td>
-      <td>0.251219</td>
+      <td>0.337144</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>17747</td>
-      <td>0.163135</td>
+      <td>0.135055</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>17858</td>
-      <td>0.161154</td>
+      <td>0.133270</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>18060</td>
-      <td>0.168104</td>
+      <td>0.139724</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>18555</td>
-      <td>0.254444</td>
+      <td>0.337138</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>18877</td>
-      <td>0.208240</td>
+      <td>0.219430</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>19839</td>
-      <td>0.192194</td>
+      <td>0.180963</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>20268</td>
-      <td>0.347345</td>
+      <td>0.344448</td>
       <td>YP_009724389.1: ORF1ab polyprotein</td>
       <td>True</td>
     </tr>
     <tr>
+      <td>21255</td>
+      <td>0.212185</td>
+      <td>YP_009724389.1: ORF1ab polyprotein</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>22227</td>
+      <td>0.203593</td>
+      <td>YP_009724390.1: surface glycoprotein</td>
+      <td>False</td>
+    </tr>
+    <tr>
       <td>22992</td>
-      <td>0.255446</td>
+      <td>0.338036</td>
       <td>YP_009724390.1: surface glycoprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>23401</td>
-      <td>0.252554</td>
+      <td>0.336377</td>
       <td>YP_009724390.1: surface glycoprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>23403</td>
-      <td>0.704685</td>
+      <td>0.600911</td>
       <td>YP_009724390.1: surface glycoprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>23731</td>
-      <td>0.255767</td>
+      <td>0.250776</td>
       <td>YP_009724390.1: surface glycoprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>25563</td>
-      <td>0.794948</td>
+      <td>0.802940</td>
       <td>YP_009724391.1: ORF3a protein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>26144</td>
-      <td>0.320431</td>
+      <td>0.260586</td>
       <td>YP_009724391.1: ORF3a protein</td>
       <td>False</td>
     </tr>
     <tr>
+      <td>26735</td>
+      <td>0.155110</td>
+      <td>YP_009724393.1: membrane glycoprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>26801</td>
+      <td>0.213753</td>
+      <td>YP_009724393.1: membrane glycoprotein</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>27944</td>
+      <td>0.143598</td>
+      <td>YP_009724396.1: ORF8 protein</td>
+      <td>True</td>
+    </tr>
+    <tr>
       <td>27964</td>
-      <td>0.188188</td>
+      <td>0.241178</td>
       <td>YP_009724396.1: ORF8 protein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>28144</td>
-      <td>0.332242</td>
+      <td>0.278068</td>
       <td>YP_009724396.1: ORF8 protein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>28854</td>
-      <td>0.213479</td>
+      <td>0.241472</td>
       <td>YP_009724397.2: nucleocapsid phosphoprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>28881</td>
-      <td>0.969888</td>
+      <td>0.992438</td>
       <td>YP_009724397.2: nucleocapsid phosphoprotein</td>
       <td>False</td>
     </tr>
     <tr>
       <td>28882</td>
-      <td>0.967853</td>
+      <td>0.988139</td>
       <td>YP_009724397.2: nucleocapsid phosphoprotein</td>
       <td>True</td>
     </tr>
     <tr>
       <td>28883</td>
-      <td>0.965465</td>
+      <td>0.986437</td>
       <td>YP_009724397.2: nucleocapsid phosphoprotein</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>28932</td>
+      <td>0.197199</td>
+      <td>YP_009724397.2: nucleocapsid phosphoprotein</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>29645</td>
+      <td>0.198391</td>
+      <td>YP_009725255.1: ORF10 protein</td>
       <td>False</td>
     </tr>
   </tbody>
@@ -323,21 +413,22 @@ ISM abundance table is constructed for regions with more than 150 submissions. W
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
 ## Reference
-Preprint in BioRxiv [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
+Research article in PLOS COMPUTATIONAL BIOLOGY [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008269).
 If you find our work helpful, please cite:
 ```
-@article {Zhao2020.04.07.030759,
-	author = {Zhao, Zhengqiao and Sokhansanj, Bahrad A. and Malhotra, Charvi and Zheng, Kitty and Rosen, Gail L.},
-	title = {Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization},
-	elocation-id = {2020.04.07.030759},
-	year = {2020},
-	doi = {10.1101/2020.04.07.030759},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759},
-	eprint = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759.full.pdf},
-	journal = {bioRxiv}
+@article{10.1371/journal.pcbi.1008269,
+    author = {Zhao, Zhengqiao AND Sokhansanj, Bahrad A. AND Malhotra, Charvi AND Zheng, Kitty AND Rosen, Gail L.},
+    journal = {PLOS Computational Biology},
+    publisher = {Public Library of Science},
+    title = {Genetic grouping of SARS-CoV-2 coronavirus sequences using informative subtype markers for pandemic spread visualization},
+    year = {2020},
+    month = {09},
+    volume = {16},
+    url = {https://doi.org/10.1371/journal.pcbi.1008269},
+    pages = {1-32},
+    number = {9},
+    doi = {10.1371/journal.pcbi.1008269}
 }
-
 ```
 ## Acknowledgement
 We would like to thank [GISAID](www.gisaid.org) for sharing the sequence data and metadata. We also gratefully acknowledge the authors, originating and submitting laboratories of the sequences from GISAID’s EpiFlu Database on which this research is based. The list is detailed in [here](results/acknowledgement_table.txt). All submitters of data may be contacted directly via the [GISAID](www.gisaid.org) website.
