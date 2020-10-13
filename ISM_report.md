@@ -413,21 +413,22 @@ ISM abundance table is constructed for regions with more than 150 submissions. W
 <!--- ![Fig 3](results/3_ISM_growth_USA.png "the dynamic subtype composition in US over time") --->
 
 ## Reference
-Preprint in BioRxiv [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://www.biorxiv.org/content/10.1101/2020.04.07.030759v5)
+Research article in PLOS COMPUTATIONAL BIOLOGY [Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008269).
 If you find our work helpful, please cite:
 ```
-@article {Zhao2020.04.07.030759,
-	author = {Zhao, Zhengqiao and Sokhansanj, Bahrad A. and Malhotra, Charvi and Zheng, Kitty and Rosen, Gail L.},
-	title = {Genetic Grouping of SARS-CoV-2 Coronavirus Sequences using Informative Subtype Markers for Pandemic Spread Visualization},
-	elocation-id = {2020.04.07.030759},
-	year = {2020},
-	doi = {10.1101/2020.04.07.030759},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759},
-	eprint = {https://www.biorxiv.org/content/early/2020/07/10/2020.04.07.030759.full.pdf},
-	journal = {bioRxiv}
+@article{10.1371/journal.pcbi.1008269,
+    author = {Zhao, Zhengqiao AND Sokhansanj, Bahrad A. AND Malhotra, Charvi AND Zheng, Kitty AND Rosen, Gail L.},
+    journal = {PLOS Computational Biology},
+    publisher = {Public Library of Science},
+    title = {Genetic grouping of SARS-CoV-2 coronavirus sequences using informative subtype markers for pandemic spread visualization},
+    year = {2020},
+    month = {09},
+    volume = {16},
+    url = {https://doi.org/10.1371/journal.pcbi.1008269},
+    pages = {1-32},
+    number = {9},
+    doi = {10.1371/journal.pcbi.1008269}
 }
-
 ```
 ## Acknowledgement
 We would like to thank [GISAID](www.gisaid.org) for sharing the sequence data and metadata. We also gratefully acknowledge the authors, originating and submitting laboratories of the sequences from GISAID’s EpiFlu Database on which this research is based. The list is detailed in [here](results/acknowledgement_table.txt). All submitters of data may be contacted directly via the [GISAID](www.gisaid.org) website.
